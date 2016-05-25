@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AdminNG.ViewModels.CursoAlumnosGroup>
+
+@{
+    ViewBag.Title = "Estadisticas Alumnos por Curso";
+}
+
+<h3>Estadisticas Alumnos por Curso</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Curso
+        </th>
+        <th>
+            Alumnos
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlumnoCount)
+            </td>
+        </tr>
+    }
+
+</table>
