@@ -22,6 +22,17 @@ namespace AdminNG.DAL
                 sedes.ForEach(s => context.Sedes.Add(s));
                 context.SaveChanges();
 
+                var responsables = new List<Responsable>
+            {
+                new Responsable{ ID = 1, Nombre ="Responsable 1", CUIT="23-12975563-1", Grade= Grade.A},
+                new Responsable{ ID = 2, Nombre ="Responsable 2", CUIT="23-12125563-2", Grade= Grade.C},
+                new Responsable{ ID = 3, Nombre ="Responsable 3", CUIT="23-12954566-3", Grade= Grade.C},
+                new Responsable{ ID = 4, Nombre ="Recibo", CUIT="23-12954564-4", Grade= Grade.R}
+            };
+
+                responsables.ForEach(s => context.Responsables.Add(s));
+                context.SaveChanges();
+
                 var cuotacodigos = new List<CuotaCodigo>
             {
              new CuotaCodigo{ ID= 1, Descripcion = "Cuota"},
@@ -37,7 +48,7 @@ namespace AdminNG.DAL
 
                 var formapagos = new List<FormaPago>
             {
-                new FormaPago{ID=1, Descripcion="Efectivo" },
+                new FormaPago{ID=1, Descripcion="Contado" },
                 new FormaPago{ID=2, Descripcion="Transferencia Bancaria" }                
             };
                 formapagos.ForEach(s => context.FormaPagos.Add(s));
@@ -61,12 +72,21 @@ namespace AdminNG.DAL
                 cursos.ForEach(s => context.Cursos.Add(s));
                 context.SaveChanges();
 
+                var familias = new List<Familia>{
+                new Familia{   Descripcion="Familia1" },
+                new Familia{   Descripcion="Familia2" },
+                new Familia{   Descripcion="Familia3" }
+            };
+                familias.ForEach(s => context.Familia.Add(s));
+                context.SaveChanges();
+
+
                 var alumnos = new List<Alumno> {
-                new Alumno{  Apellido= "Ape 1", Nombre="Nombre 1" },
-                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2" },
-                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3" },
-                new Alumno{  Apellido= "Ape 4", Nombre="Nombre 4" },
-                new Alumno{  Apellido= "Ape 5", Nombre="Nombre 5" }
+                new Alumno{  Apellido= "Ape 1", Nombre="Nombre 1", Familia= familias[0] },
+                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2", Familia= familias[0] },
+                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3", Familia= familias[1] },
+                new Alumno{  Apellido= "Ape 4", Nombre="Nombre 4" , Familia= familias[2]},
+                new Alumno{  Apellido= "Ape 5", Nombre="Nombre 5" , Familia= familias[2]}
             };
                 alumnos.ForEach(s => context.Alumnos.Add(s));
                 context.SaveChanges();
@@ -76,7 +96,20 @@ namespace AdminNG.DAL
 
                 inscripciones.ForEach(s => context.Inscripciones.Add(s));
                 context.SaveChanges();
+
+                var cargoTipos= new List<CargoTipo>
+            {
+                new CargoTipo{ID=1, Descripcion="Cuota" },
+                new CargoTipo{ID=2, Descripcion="Primera Mora" },
+                new CargoTipo{ID=3, Descripcion="Segunda Mora" },
+                new CargoTipo{ID=4, Descripcion="Comedor" }                
+            };
+                cargoTipos.ForEach(s => context.CargoTipos.Add(s));
+                context.SaveChanges();
+
             }
+
+
             catch (DataException ex)
             {
 

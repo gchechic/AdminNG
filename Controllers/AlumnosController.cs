@@ -21,23 +21,29 @@ namespace AdminNG.Controllers
         {
             ViewBag.ApellidoSortParm = String.IsNullOrEmpty(sortOrder) ? "apellido_desc" : "";
             ViewBag.CursoSortParm = sortOrder == "Curso" ? "curso_desc" : "Curso";
-            var alumnos = from s in db.Alumnos
+            var alumnosDB = from s in db.Alumnos
                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                alumnos = alumnos.Where(s => s.Apellido.Contains(searchString)
+                alumnosDB = alumnosDB.Where(s => s.Apellido.Contains(searchString)
                                        || s.Nombre.Contains(searchString));
             }
+            //var x1 = User.Identity.Name;
+            //var x2 = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(User.Identity);
+            //var x3 = Microsoft.AspNet.Identity.IdentityExtensions.GetUserName(User.Identity);
+            var alumnos = from s in alumnosDB.ToList()
+                          select new AdminNG.ViewModels.VMAlumno() { ID = s.ID, Apellido = s.Apellido, Nombre = s.Nombre, CursoCodigo = s.InscripcionActiva == null ? null : s.InscripcionActiva.Curso.Codigo };
+
             switch (sortOrder)
             {
                 case "apellido_desc":
                     alumnos = alumnos.OrderByDescending(s => s.Apellido);
                     break;
                 case "Curso":
-                    alumnos = alumnos.OrderBy(s => s.InscripcionActiva.Curso.Codigo);
+                    alumnos = alumnos.OrderBy(s => s.CursoCodigo);
                     break;
                 case "curso_desc":
-                    alumnos = alumnos.OrderByDescending(s => s.InscripcionActiva.Curso.Codigo);
+                    alumnos = alumnos.OrderByDescending(s => s.CursoCodigo);
                     break;
                 default:
                     alumnos = alumnos.OrderBy(s => s.Apellido);

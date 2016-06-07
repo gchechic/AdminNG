@@ -10,7 +10,8 @@ namespace AdminNG.Models
     [Table("Alumnos")]
     public class Alumno
     {
-        public int ID { get; set; }        
+        public int ID { get; set; }
+        public int FamiliaID { get; set; } 
         [Required]
         public string Apellido { get; set; }
         [Required]
