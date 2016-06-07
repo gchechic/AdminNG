@@ -20,7 +20,7 @@ namespace AdminNG.Models
         public virtual ICollection<Inscripcion> Inscripciones { get; set; }
         public  virtual  Inscripcion InscripcionActiva { get
             {
-                return Inscripciones.ToList().FirstOrDefault(i => i.IsActiva);
+            return Inscripciones.FirstOrDefault ( i => i.FechaAlta <= DateTime.Now && (i.FechaBaja == null || i.FechaBaja >= DateTime.Now ));
             }
         }
     }

@@ -10,6 +10,7 @@ namespace AdminNG.Models
     public class Familiar
     {
         public int ID { get; set; }
+        public int FamiliaID { get; set; }
 //        [Required]
         public string Apellido { get; set; }
         public string Nombre { get; set; }        
@@ -18,7 +19,7 @@ namespace AdminNG.Models
         [Required]
         public int DNI{ get; set; }
 
-        [Required]
+        
         public virtual Familia Familia { get; set; }
         [Required]
         public virtual FamiliaRol FamiliaRol { get; set; }

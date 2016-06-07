@@ -11,17 +11,15 @@ namespace AdminNG.Models
     public class Inscripcion
     {
         public int ID { get; set; }
+        public int CursoID { get; set; }
+        public int AlumnoID { get; set; }
         [Required]
         public DateTime FechaAlta { get; set; }
         public DateTime? FechaBaja { get; set; }
-        [Required]
+        
         public virtual Curso Curso { get; set; }
-        [Required]
+        
         public virtual Alumno Alumno { get; set; }
-        public virtual CuotaCodigo CuotaCodigo { get; set; }
-        public bool IsActiva
-        {
-            get { return this.FechaAlta <= DateTime.Now && (this.FechaBaja == null || this.FechaBaja >= DateTime.Now); } 
-        }
+        public virtual CuotaCodigo CuotaCodigo { get; set; }        
     }
 }
