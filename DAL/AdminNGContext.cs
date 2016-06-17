@@ -24,18 +24,26 @@ namespace AdminNG.DAL
         public DbSet<Familia> Familia { get; set; }
         public DbSet<FamiliaRol> FamiliaRoles { get; set; }
         
-        public DbSet<CargoTipo> CargoTipos { get; set; }
+        public DbSet<MovimientoCuentaTipo> CargoTipos { get; set; }
 
-        public DbSet<Responsable> Responsables { get; set; }
-        public DbSet<Tope> Topes { get; set; }
+        public DbSet<Responsable> Responsables { get; set; }        
 
-        public DbSet<ComprobantePago> ComprobantePagos{ get; set; }
-        public DbSet<Recibo> Recibos { get; set; }
+        public DbSet<MovimientoPago> MovimientoPagos { get; set; }
 
-        public DbSet<Cargo> Cargos { get; set; }
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-            
-        //}
+        public DbSet<PagoContado> PagoContados { get; set; }
+        public DbSet<PagoTransferencia> PagoTransferencias { get; set; }
+        public DbSet<PagoDeposito> PagoDeposito{ get; set; }
+
+        public DbSet<MovimientoCuenta> MovimientoCuentas { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+           // modelBuilder.Entity<MovimientoCuenta>()
+           //.Map<MovimientoComedor>(m => m.Requires("Codigo2").HasValue("COM"))
+           //.Map<MovimientoCuota>(m => m.Requires("Codigo").HasValue("CUO"));
+           // base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Pago>().ToTable("Pagos");   
+        }
+
+        public System.Data.Entity.DbSet<AdminNG.Models.Pago> Pagos { get; set; }
     }
 }

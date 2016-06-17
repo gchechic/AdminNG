@@ -16,7 +16,7 @@ namespace AdminNG.Models
         public string Apellido { get; set; }
         [Required]
         public string Nombre { get; set; }
-        
+        public bool Comedor { get; set; }
         public virtual Familia Familia { get; set; }
         public virtual ICollection<Inscripcion> Inscripciones { get; set; }
         public  virtual  Inscripcion InscripcionActiva { get

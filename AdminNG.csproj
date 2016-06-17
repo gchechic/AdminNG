@@ -180,17 +180,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Business\Cargo.cs" />
+    <Compile Include="Business\MovimientoCuenta.cs" />
+    <Compile Include="Business\Pago.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumnosController.cs" />
-    <Compile Include="Controllers\CargosController.cs" />
-    <Compile Include="Controllers\ComprobantePagosController.cs" />
     <Compile Include="Controllers\CursoEstadisticasController.cs" />
     <Compile Include="Controllers\CursosAlumnosController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RecibosController.cs" />
+    <Compile Include="Controllers\MovimientoCuentasController.cs" />
+    <Compile Include="Controllers\PagoContadosController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
+    <Compile Include="Controllers\PagoTransferenciasController.cs" />
     <Compile Include="DAL\AdminNGContext.cs" />
     <Compile Include="DAL\AdminNGInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,11 +200,17 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
-    <Compile Include="Models\Cargo.cs" />
-    <Compile Include="Models\CargoTipo.cs" />
-    <Compile Include="Models\ComprobantePago.cs" />
+    <Compile Include="Models\MovimientoComedor.cs" />
+    <Compile Include="Models\MovimientoCuenta.cs" />
+    <Compile Include="Models\MovimientoCuentaTipo.cs" />
     <Compile Include="Models\CuotaValor.cs" />
     <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\MovimientoCuota.cs" />
+    <Compile Include="Models\MovimientoBonificacion.cs" />
+    <Compile Include="Models\MovimientoPago.cs" />
+    <Compile Include="Models\Pago.cs" />
+    <Compile Include="Models\PagoDeposito.cs" />
+    <Compile Include="Models\PagoTransferencia.cs" />
     <Compile Include="Models\Responsable.cs" />
     <Compile Include="Models\Familia.cs" />
     <Compile Include="Models\Familiar.cs" />
@@ -213,11 +221,14 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Inscripcion.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Recibo.cs" />
-    <Compile Include="Models\ReciboItem.cs" />
+    <Compile Include="Models\PagoContado.cs" />
     <Compile Include="Models\Sede.cs" />
-    <Compile Include="Models\Tope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CursoAlumnosGroup.cs" />
     <Compile Include="ViewModels\VMAlumno.cs" />
@@ -243,7 +254,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -289,20 +302,30 @@
     <Content Include="Views\Cursos\Edit.cshtml" />
     <Content Include="Views\Cursos\Index.cshtml" />
     <Content Include="Views\CursoEstadisticas\AlumnosGroup.cshtml" />
-    <Content Include="Views\ComprobantePagos\Create.cshtml" />
-    <Content Include="Views\ComprobantePagos\Delete.cshtml" />
-    <Content Include="Views\ComprobantePagos\Details.cshtml" />
-    <Content Include="Views\ComprobantePagos\Edit.cshtml" />
-    <Content Include="Views\ComprobantePagos\Index.cshtml" />
-    <Content Include="Views\Recibos\Create.cshtml" />
-    <Content Include="Views\Recibos\Delete.cshtml" />
-    <Content Include="Views\Recibos\Details.cshtml" />
-    <Content Include="Views\Recibos\Edit.cshtml" />
-    <Content Include="Views\Recibos\Index.cshtml" />
+    <Content Include="Views\Pagos\Create.cshtml" />
+    <Content Include="Views\Pagos\Delete.cshtml" />
+    <Content Include="Views\Pagos\Details.cshtml" />
+    <Content Include="Views\Pagos\Edit.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Pagos\CreatePagoContado.cshtml" />
+    <Content Include="Views\MovimientoCuentas\Create.cshtml" />
+    <Content Include="Views\MovimientoCuentas\Delete.cshtml" />
+    <Content Include="Views\MovimientoCuentas\Details.cshtml" />
+    <Content Include="Views\MovimientoCuentas\Edit.cshtml" />
+    <Content Include="Views\MovimientoCuentas\Index.cshtml" />
+    <Content Include="Views\PagoTransferencias\Create.cshtml" />
+    <Content Include="Views\PagoTransferencias\Delete.cshtml" />
+    <Content Include="Views\PagoTransferencias\Details.cshtml" />
+    <Content Include="Views\PagoTransferencias\Edit.cshtml" />
+    <Content Include="Views\PagoTransferencias\Index.cshtml" />
+    <Content Include="Views\PagoContados\Create.cshtml" />
+    <Content Include="Views\PagoContados\Delete.cshtml" />
+    <Content Include="Views\PagoContados\Details.cshtml" />
+    <Content Include="Views\PagoContados\Edit.cshtml" />
+    <Content Include="Views\PagoContados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Cargos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -311,6 +334,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

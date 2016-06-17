@@ -13,24 +13,55 @@ namespace AdminNG.DAL
             try
             {
 
-                var sedes = new List<Sede>
-            {
-                new Sede{ ID = 1, Nombre ="Bulnes"},
-                new Sede{ ID = 2, Nombre ="Paunero"}
-            };
-
-                sedes.ForEach(s => context.Sedes.Add(s));
-                context.SaveChanges();
-
                 var responsables = new List<Responsable>
             {
                 new Responsable{ ID = 1, Nombre ="Responsable 1", CUIT="23-12975563-1", Grade= Grade.A},
                 new Responsable{ ID = 2, Nombre ="Responsable 2", CUIT="23-12125563-2", Grade= Grade.C},
                 new Responsable{ ID = 3, Nombre ="Responsable 3", CUIT="23-12954566-3", Grade= Grade.C},
-                new Responsable{ ID = 4, Nombre ="Recibo", CUIT="23-12954564-4", Grade= Grade.R}
+                new Responsable{ ID = 10, Nombre ="Bulnes", CUIT="23-12954564-4", Grade= Grade.R},
+                 new Responsable{ ID = 11, Nombre ="Paunero", CUIT="23-12954564-4", Grade= Grade.R}
             };
 
                 responsables.ForEach(s => context.Responsables.Add(s));
+                context.SaveChanges();
+                var sedes = new List<Sede>
+            {
+                new Sede{ ID = 1, Nombre ="Bulnes", ResponsableID=10},
+                new Sede{ ID = 2, Nombre ="Paunero", ResponsableID=11}
+            };
+
+                sedes.ForEach(s => context.Sedes.Add(s));
+                context.SaveChanges();
+
+                var formapagos = new List<FormaPago>
+            {
+                new FormaPago{ID=1, Descripcion="Contado" },
+                new FormaPago{ID=2, Descripcion="Transferencia" },
+                new FormaPago{ID=3, Descripcion="Deposito" }
+            };
+                formapagos.ForEach(s => context.FormaPagos.Add(s));
+                context.SaveChanges();
+
+                var cargoTipos = new List<MovimientoCuentaTipo>
+            {
+                new MovimientoCuentaTipo{ID=1, Descripcion="Cuota" },
+                new MovimientoCuentaTipo{ID=2, Descripcion="Primera Mora" },
+                new MovimientoCuentaTipo{ID=3, Descripcion="Segunda Mora" },
+                new MovimientoCuentaTipo{ID=4, Descripcion="Comedor" },
+                new MovimientoCuentaTipo{ID=5, Descripcion="Pago" },
+                new MovimientoCuentaTipo{ID=6, Descripcion="Bonificacion" },
+                new MovimientoCuentaTipo{ID=8, Descripcion="Redondeo" }
+            };
+                cargoTipos.ForEach(s => context.CargoTipos.Add(s));
+                context.SaveChanges();
+
+
+                var familiaroles = new List<FamiliaRol>
+            {
+                new FamiliaRol{ID=1, Descripcion="Padre" },
+                new FamiliaRol{ID=2, Descripcion="Madre" }                
+            };
+                familiaroles.ForEach(s => context.FamiliaRoles.Add(s));
                 context.SaveChanges();
 
                 var cuotacodigos = new List<CuotaCodigo>
@@ -46,21 +77,9 @@ namespace AdminNG.DAL
                 cuotacodigos.ForEach(s => context.CuotaCodigos.Add(s));
                 context.SaveChanges();
 
-                var formapagos = new List<FormaPago>
-            {
-                new FormaPago{ID=1, Descripcion="Contado" },
-                new FormaPago{ID=2, Descripcion="Transferencia Bancaria" }                
-            };
-                formapagos.ForEach(s => context.FormaPagos.Add(s));
-                context.SaveChanges();
 
-                var familiaroles = new List<FamiliaRol>
-            {
-                new FamiliaRol{ID=1, Descripcion="Padre" },
-                new FamiliaRol{ID=2, Descripcion="Madre" }                
-            };
-                familiaroles.ForEach(s => context.FamiliaRoles.Add(s));
-                context.SaveChanges();
+
+       
 
                 var cursos = new List<Curso> { 
                 new Curso { ID = 1, Codigo = "C1", Nivel = 1 } ,
@@ -95,16 +114,6 @@ namespace AdminNG.DAL
                 alumnos.ForEach(s => inscripciones.Add(new Inscripcion { Alumno = s, Curso = cursos.Find(c => c.ID == 6-s.ID), FechaAlta = DateTime.Now }));
 
                 inscripciones.ForEach(s => context.Inscripciones.Add(s));
-                context.SaveChanges();
-
-                var cargoTipos= new List<CargoTipo>
-            {
-                new CargoTipo{ID=1, Descripcion="Cuota" },
-                new CargoTipo{ID=2, Descripcion="Primera Mora" },
-                new CargoTipo{ID=3, Descripcion="Segunda Mora" },
-                new CargoTipo{ID=4, Descripcion="Comedor" }                
-            };
-                cargoTipos.ForEach(s => context.CargoTipos.Add(s));
                 context.SaveChanges();
 
             }

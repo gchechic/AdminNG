@@ -32,7 +32,7 @@ namespace AdminNG.Controllers
             //var x2 = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(User.Identity);
             //var x3 = Microsoft.AspNet.Identity.IdentityExtensions.GetUserName(User.Identity);
             var alumnos = from s in alumnosDB.ToList()
-                          select new AdminNG.ViewModels.VMAlumno() { ID = s.ID, Apellido = s.Apellido, Nombre = s.Nombre, CursoCodigo = s.InscripcionActiva == null ? null : s.InscripcionActiva.Curso.Codigo };
+                          select new AdminNG.ViewModels.VMAlumno() { ID = s.ID, Apellido = s.Apellido, Nombre = s.Nombre, CursoCodigo = s.InscripcionActiva == null ? null : s.InscripcionActiva.Curso.Codigo, FamiliaID= s.FamiliaID };
 
             switch (sortOrder)
             {
@@ -49,7 +49,7 @@ namespace AdminNG.Controllers
                     alumnos = alumnos.OrderBy(s => s.Apellido);
                     break;
             }
-            //var alumnos = db.Alumnos.Include(a => a.Inscripcion);
+            
             return View(alumnos.ToList());
         }
 
@@ -210,7 +210,19 @@ namespace AdminNG.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        public ActionResult Recibos(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Alumno alumno = db.Alumnos.Find(id);
+            if (alumno == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Create", "Recibos", new {FamiliaID=alumno.FamiliaID} );
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
