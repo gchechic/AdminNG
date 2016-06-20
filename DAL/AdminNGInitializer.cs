@@ -27,7 +27,7 @@ namespace AdminNG.DAL
                 var sedes = new List<Sede>
             {
                 new Sede{ ID = 1, Nombre ="Bulnes", ResponsableID=10},
-                new Sede{ ID = 2, Nombre ="Paunero", ResponsableID=11}
+                new Sede{ ID = 2, Nombre ="Ugarteche", ResponsableID=11}
             };
 
                 sedes.ForEach(s => context.Sedes.Add(s));

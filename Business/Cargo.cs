@@ -24,5 +24,9 @@ namespace AdminNG.Business
             //var q1 = db.Cargos.Where<AdminNG.Models.Cargo>(c => c.Inscripcion.Alumno.FamiliaID == FamiliaID && c.Saldo != 0).OrderBy(c => c.Fecha);
             return q.ToList<AdminNG.Models.Cargo>();
         }
+         public double  TotalCargosPendientes( int FamiliaID)
+        {
+            return CargosPendientes(FamiliaID).Sum(c => c.Importe);
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace AdminNG.Models
     {
         public int ID { get; set; }
         public int ReciboID { get; set; }
+        public int CargoID { get; set; }
         [Required]
         public double Importe { get; set; }
         [Required]
