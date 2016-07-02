@@ -1,0 +1,104 @@
+﻿@model AdminNG.Models.PagoBancario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PagoBancario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Familia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Familia.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FormaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormaPago.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsable.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sede)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sede.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComprobanteNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComprobanteNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EsDeposito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EsDeposito)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.DetalleBancario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DetalleBancario)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anulado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Anulado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Volver", null, null, null, new { href = Request.UrlReferrer })
+</p>

@@ -13,7 +13,7 @@ namespace AdminNG.Models
         public enum IDS:int
         {
             Contado = 1,
-            Transferencia,
+            Bancario,
             Deposito
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

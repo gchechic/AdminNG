@@ -31,8 +31,8 @@ namespace AdminNG.DAL
         public DbSet<MovimientoPago> MovimientoPagos { get; set; }
 
         public DbSet<PagoContado> PagoContados { get; set; }
-        public DbSet<PagoTransferencia> PagoTransferencias { get; set; }
-        public DbSet<PagoDeposito> PagoDeposito{ get; set; }
+        public DbSet<PagoBancario> PagoBancarios { get; set; }
+    
 
         public DbSet<MovimientoCuenta> MovimientoCuentas { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

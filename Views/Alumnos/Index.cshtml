@@ -46,7 +46,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Recibo", "CreateRecibo", "PagoContados", new { FamiliaID=item.FamiliaID},null)     | 
-            @Html.ActionLink("Transferencia", "Create", "PagoTransferencias", new { FamiliaID = item.FamiliaID }, null)
+            @Html.ActionLink("Bancario", "Create", "PagoBancarios", new { FamiliaID = item.FamiliaID }, null)
                    
         </td>
     </tr>

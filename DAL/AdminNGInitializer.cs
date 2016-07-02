@@ -15,11 +15,11 @@ namespace AdminNG.DAL
 
                 var responsables = new List<Responsable>
             {
-                new Responsable{ ID = 1, Nombre ="Responsable 1", CUIT="23-12975563-1", Grade= Grade.A},
-                new Responsable{ ID = 2, Nombre ="Responsable 2", CUIT="23-12125563-2", Grade= Grade.C},
-                new Responsable{ ID = 3, Nombre ="Responsable 3", CUIT="23-12954566-3", Grade= Grade.C},
-                new Responsable{ ID = 10, Nombre ="Bulnes", CUIT="23-12954564-4", Grade= Grade.R},
-                 new Responsable{ ID = 11, Nombre ="Paunero", CUIT="23-12954564-4", Grade= Grade.R}
+                new Responsable{ ID = 1, Nombre ="Responsable 1", Grade= Grade.A},
+                new Responsable{ ID = 2, Nombre ="Responsable 2", Grade= Grade.C},
+                new Responsable{ ID = 3, Nombre ="Responsable 3", Grade= Grade.C},
+                new Responsable{ ID = 10, Nombre ="Bulnes", Grade= Grade.R},
+                new Responsable{ ID = 11, Nombre ="Ugarteche",  Grade= Grade.R}
             };
 
                 responsables.ForEach(s => context.Responsables.Add(s));
@@ -36,7 +36,7 @@ namespace AdminNG.DAL
                 var formapagos = new List<FormaPago>
             {
                 new FormaPago{ID=1, Descripcion="Contado" },
-                new FormaPago{ID=2, Descripcion="Transferencia" },
+                new FormaPago{ID=2, Descripcion="Bancario" },
                 new FormaPago{ID=3, Descripcion="Deposito" }
             };
                 formapagos.ForEach(s => context.FormaPagos.Add(s));
@@ -87,7 +87,7 @@ namespace AdminNG.DAL
                 new Curso { ID = 3, Codigo = "C3", Nivel = 3 } ,
                 new Curso { ID = 4, Codigo = "C4", Nivel = 4 } ,
                 new Curso { ID = 5, Codigo = "C5", Nivel = 5 } ,
-                 new Curso { ID = 5, Codigo = "C6", Nivel = 6 } 
+                 new Curso { ID = 6, Codigo = "C6", Nivel = 6 } 
             };
                 cursos.ForEach(s => context.Cursos.Add(s));
                 context.SaveChanges();
@@ -118,7 +118,7 @@ namespace AdminNG.DAL
                 context.SaveChanges();
 
                 var inscripciones = new List<Inscripcion>();
-                alumnos.ForEach(s => inscripciones.Add(new Inscripcion { Alumno = s, Curso = cursos.Find(c => c.ID == 6-s.ID), FechaAlta = DateTime.Now }));
+                alumnos.ForEach(s => inscripciones.Add(new Inscripcion { Alumno = s, Curso = cursos.Find(c => c.ID == 7-s.ID), FechaAlta = DateTime.Now }));
 
                 inscripciones.ForEach(s => context.Inscripciones.Add(s));
                 context.SaveChanges();
