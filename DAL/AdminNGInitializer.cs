@@ -86,26 +86,33 @@ namespace AdminNG.DAL
                 new Curso { ID = 2, Codigo = "C2", Nivel = 2 } ,
                 new Curso { ID = 3, Codigo = "C3", Nivel = 3 } ,
                 new Curso { ID = 4, Codigo = "C4", Nivel = 4 } ,
-                new Curso { ID = 5, Codigo = "C5", Nivel = 5 } 
+                new Curso { ID = 5, Codigo = "C5", Nivel = 5 } ,
+                 new Curso { ID = 5, Codigo = "C6", Nivel = 6 } 
             };
                 cursos.ForEach(s => context.Cursos.Add(s));
                 context.SaveChanges();
 
                 var familias = new List<Familia>{
-                new Familia{   Descripcion="Familia1" },
-                new Familia{   Descripcion="Familia2" },
-                new Familia{   Descripcion="Familia3" }
+                new Familia{   Descripcion="Ape 0" },
+                new Familia{   Descripcion="Ape 1" },
+                new Familia{   Descripcion="Ape 2" },
+                new Familia{   Descripcion="Ape 3" },
+                new Familia{   Descripcion="Ape 4" },
+                new Familia{   Descripcion="Ape 5" },
+                new Familia{   Descripcion="Ape 3" }
             };
                 familias.ForEach(s => context.Familia.Add(s));
                 context.SaveChanges();
 
 
                 var alumnos = new List<Alumno> {
-                new Alumno{  Apellido= "Ape 1", Nombre="Nombre 1", Familia= familias[0] },
-                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2", Familia= familias[0] },
-                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3", Familia= familias[1] },
-                new Alumno{  Apellido= "Ape 4", Nombre="Nombre 4" , Familia= familias[2]},
-                new Alumno{  Apellido= "Ape 5", Nombre="Nombre 5" , Familia= familias[2]}
+                new Alumno{  Apellido= "Ape 1", Nombre="Nombre 1", Familia= familias[1] },
+                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2", Familia= familias[2] },
+                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2 hermano", Familia= familias[2] },
+                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3", Familia= familias[3] },
+                new Alumno{  Apellido= "Ape 4", Nombre="Nombre 4" , Familia= familias[4]},
+                new Alumno{  Apellido= "Ape 5", Nombre="Nombre 5" , Familia= familias[5]},
+                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3 Repetido", Familia= familias[6] },
             };
                 alumnos.ForEach(s => context.Alumnos.Add(s));
                 context.SaveChanges();

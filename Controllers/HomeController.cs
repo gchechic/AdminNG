@@ -10,13 +10,14 @@ namespace AdminNG.Controllers
     {
         public ActionResult Index()
         {
+            //HttpContext.Session["Test"] = "Ben Rules!";
             return View();
         }
 
         public ActionResult About()
-        {
+        {            
             ViewBag.Message = "Your application description page.";
-
+         //   ViewBag.Message = HttpContext.Session["Test"];
             return View();
         }
 

@@ -40,8 +40,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -187,6 +187,7 @@
     <Compile Include="Controllers\CursoEstadisticasController.cs" />
     <Compile Include="Controllers\CursosAlumnosController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
+    <Compile Include="Controllers\FamiliasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovimientoCuentasController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\PagoDeposito.cs" />
     <Compile Include="Models\PagoTransferencia.cs" />
+    <Compile Include="Models\Repositorio.cs" />
     <Compile Include="Models\Responsable.cs" />
     <Compile Include="Models\Familia.cs" />
     <Compile Include="Models\Familiar.cs" />
@@ -224,18 +226,16 @@
     <Compile Include="Models\PagoContado.cs" />
     <Compile Include="Models\Sede.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CursoAlumnosGroup.cs" />
-    <Compile Include="ViewModels\VMAlumno.cs" />
+    <Compile Include="ViewModels\Alumnos\VMAlumno.cs" />
+    <Compile Include="ViewModels\Pagos\VMPagoRenumerar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -243,14 +243,20 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.0.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -270,7 +276,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -304,10 +309,9 @@
     <Content Include="Views\CursoEstadisticas\AlumnosGroup.cshtml" />
     <Content Include="Views\Pagos\Create.cshtml" />
     <Content Include="Views\Pagos\Delete.cshtml" />
-    <Content Include="Views\Pagos\Details.cshtml" />
+    <Content Include="Views\Pagos\Renumerar.cshtml" />
     <Content Include="Views\Pagos\Edit.cshtml" />
     <Content Include="Views\Pagos\Index.cshtml" />
-    <Content Include="Views\Pagos\CreatePagoContado.cshtml" />
     <Content Include="Views\MovimientoCuentas\Create.cshtml" />
     <Content Include="Views\MovimientoCuentas\Delete.cshtml" />
     <Content Include="Views\MovimientoCuentas\Details.cshtml" />
@@ -323,9 +327,17 @@
     <Content Include="Views\PagoContados\Details.cshtml" />
     <Content Include="Views\PagoContados\Edit.cshtml" />
     <Content Include="Views\PagoContados\Index.cshtml" />
+    <Content Include="Views\Alumnos\Create - Copy.cshtml" />
+    <Content Include="Views\PagoContados\CreateRecibo.cshtml" />
+    <Content Include="Views\Familias\Create.cshtml" />
+    <Content Include="Views\Familias\Delete.cshtml" />
+    <Content Include="Views\Familias\Details.cshtml" />
+    <Content Include="Views\Familias\Edit.cshtml" />
+    <Content Include="Views\Familias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\themes\base\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -336,10 +348,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resources.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

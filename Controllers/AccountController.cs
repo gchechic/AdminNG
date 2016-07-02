@@ -52,6 +52,31 @@ namespace AdminNG.Controllers
             }
         }
 
+        ///TODO: BORRAR!
+        [AllowAnonymous]
+        public async Task<ActionResult> LoginEspecial(string returnUrl)
+        {
+            Session["SedeID"] = null;
+            if (string.IsNullOrEmpty(returnUrl))
+                returnUrl ="Alumnos";
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync("gchechic", "Clave2016_", isPersistent: true, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    Session["SedeID"] = (int)AdminNG.Models.Sede.IDS.Paunero; ///TODO:buscar la sede asociada al usuario
+                    return RedirectToAction("Index", returnUrl);
+                case SignInStatus.LockedOut:
+                case SignInStatus.RequiresVerification:
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View();
+            }
+
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -70,15 +95,17 @@ namespace AdminNG.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
                 return View(model);
             }
-
+            Session["SedeID"] = null;
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["SedeID"] = (int)AdminNG.Models.Sede.IDS.Paunero; ///TODO:buscar la sede asociada al usuario
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -151,7 +178,7 @@ namespace AdminNG.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
