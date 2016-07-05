@@ -13,7 +13,6 @@ namespace AdminNG.Models
         [Range(1, 12)]
         public int Mes { get; set; }
         public int InscripcionID { get; set; }
-        public int MovimientoCuotaID { get; set; }
-        public bool PrimeraMora { get; set; }
+        public int MovimientoCuotaID { get; set; }     
     }
 }

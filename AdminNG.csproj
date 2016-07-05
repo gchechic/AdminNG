@@ -201,12 +201,14 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
+    <Compile Include="Models\CalendarioVtoItem.cs" />
+    <Compile Include="Models\CalendarioVto.cs" />
     <Compile Include="Models\MovimientoComedor.cs" />
     <Compile Include="Models\MovimientoCuenta.cs" />
     <Compile Include="Models\MovimientoCuentaTipo.cs" />
-    <Compile Include="Models\CuotaValor.cs" />
+    <Compile Include="Models\CargoValor.cs" />
     <Compile Include="Models\Curso.cs" />
-    <Compile Include="Models\MovimientoCuota - Copy.cs" />
+    <Compile Include="Models\MovimientoMora.cs" />
     <Compile Include="Models\MovimientoCuota.cs" />
     <Compile Include="Models\MovimientoBonificacion.cs" />
     <Compile Include="Models\MovimientoPago.cs" />
@@ -218,7 +220,7 @@
     <Compile Include="Models\Familiar.cs" />
     <Compile Include="Models\FamiliaRol.cs" />
     <Compile Include="Models\Feriado.cs" />
-    <Compile Include="Models\CuotaCodigo.cs" />
+    <Compile Include="Models\CargoCodigo.cs" />
     <Compile Include="Models\FormaPago.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Inscripcion.cs" />

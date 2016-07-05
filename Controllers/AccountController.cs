@@ -65,7 +65,7 @@ namespace AdminNG.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    Session["SedeID"] = (int)AdminNG.Models.Sede.IDS.Paunero; ///TODO:buscar la sede asociada al usuario
+                    Session["SedeID"] = (int)AdminNG.Models.Sede.IDS.Ugarteche; ///TODO:buscar la sede asociada al usuario
                     return RedirectToAction("Index", returnUrl);
                 case SignInStatus.LockedOut:
                 case SignInStatus.RequiresVerification:
@@ -105,7 +105,7 @@ namespace AdminNG.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    Session["SedeID"] = (int)AdminNG.Models.Sede.IDS.Paunero; ///TODO:buscar la sede asociada al usuario
+                    Session["SedeID"] = (int)AdminNG.Models.Sede.IDS.Ugarteche; ///TODO:buscar la sede asociada al usuario
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

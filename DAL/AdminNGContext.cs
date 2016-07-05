@@ -14,9 +14,9 @@ namespace AdminNG.DAL
         public DbSet<Alumno> Alumnos{ get; set; }
         public DbSet<Inscripcion> Inscripciones { get; set; }
         public DbSet<Curso> Cursos{ get; set; }
-        
 
-        public DbSet<CuotaCodigo> CuotaCodigos{ get; set; }
+        public DbSet<CalendarioVto> CalendarioVtos { get; set; }
+        public DbSet<CargoCodigo> CuotaCodigos{ get; set; }
         public DbSet<Sede> Sedes{ get; set; }
 
         public DbSet<FormaPago> FormaPagos { get; set; }

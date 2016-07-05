@@ -26,8 +26,8 @@ namespace AdminNG.DAL
                 context.SaveChanges();
                 var sedes = new List<Sede>
             {
-                new Sede{ ID = 1, Nombre ="Bulnes", ResponsableID=10},
-                new Sede{ ID = 2, Nombre ="Ugarteche", ResponsableID=11}
+                new Sede{ ID = (int)Sede.IDS.Bulnes, Nombre ="Bulnes", ResponsableID=10},
+                new Sede{ ID = (int)Sede.IDS.Ugarteche, Nombre ="Ugarteche", ResponsableID=11}
             };
 
                 sedes.ForEach(s => context.Sedes.Add(s));
@@ -35,24 +35,25 @@ namespace AdminNG.DAL
 
                 var formapagos = new List<FormaPago>
             {
-                new FormaPago{ID=1, Descripcion="Contado" },
-                new FormaPago{ID=2, Descripcion="Bancario" },
-                new FormaPago{ID=3, Descripcion="Deposito" }
+                new FormaPago{ID=(int)FormaPago.IDS.Contado, Descripcion="Contado" },
+                new FormaPago{ID=(int)FormaPago.IDS.Bancario, Descripcion="Bancario" }
             };
                 formapagos.ForEach(s => context.FormaPagos.Add(s));
                 context.SaveChanges();
 
-                var cargoTipos = new List<MovimientoCuentaTipo>
+               
+                var movimientoCuentaTipos = new List<MovimientoCuentaTipo>
             {
-                new MovimientoCuentaTipo{ID=1, Descripcion="Cuota" },
-                new MovimientoCuentaTipo{ID=2, Descripcion="Primera Mora" },
-                new MovimientoCuentaTipo{ID=3, Descripcion="Segunda Mora" },
-                new MovimientoCuentaTipo{ID=4, Descripcion="Comedor" },
-                new MovimientoCuentaTipo{ID=5, Descripcion="Pago" },
-                new MovimientoCuentaTipo{ID=6, Descripcion="Bonificacion" },
-                new MovimientoCuentaTipo{ID=8, Descripcion="Redondeo" }
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.Cuota, Descripcion="Cuota" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.PrimeraMora, Descripcion="Primera Mora" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.SegundaMora, Descripcion="Segunda Mora" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.Matricula, Descripcion="Matricula" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.Comedor, Descripcion="Comedor" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.Pago, Descripcion="Pago" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.Bonificacion, Descripcion="Bonificacion" },
+                new MovimientoCuentaTipo{ID=(int)MovimientoCuentaTipo.IDS.Redondeo, Descripcion="Redondeo" }
             };
-                cargoTipos.ForEach(s => context.CargoTipos.Add(s));
+                movimientoCuentaTipos.ForEach(s => context.CargoTipos.Add(s));
                 context.SaveChanges();
 
 
@@ -64,21 +65,25 @@ namespace AdminNG.DAL
                 familiaroles.ForEach(s => context.FamiliaRoles.Add(s));
                 context.SaveChanges();
 
-                var cuotacodigos = new List<CuotaCodigo>
+                var cuotacodigos = new List<CargoCodigo>
             {
-             new CuotaCodigo{ ID= 1, Descripcion = "Cuota"},
-             new CuotaCodigo{ ID= 2, Descripcion="Cuota Primer Hermano"},
-             new CuotaCodigo{ ID= 3, Descripcion="Cuota Segundo Hermano"},
-             new CuotaCodigo{ ID= 4, Descripcion="Cuota Tercer Hermano"},
-             new CuotaCodigo{ ID= 5, Descripcion="Cuota Cuarto Hermano"},
-             new CuotaCodigo{ ID= 101, Descripcion="Primera Mora"},
-             new CuotaCodigo{ ID= 102, Descripcion="Segunda Mora"}             
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.Completa, Descripcion = "Completa"},
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.SegundoHijo, Descripcion="Primer Hermano"},
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.TercerHijo, Descripcion="Segundo Hermano"},
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.CuartoHijo, Descripcion="Tercer Hermano"},
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.QuintoHijo, Descripcion="Cuarto Hermano"},
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.Completa, Descripcion="Primera Mora"},
+             new CargoCodigo{ ID= (int)CargoCodigo.CargoCodigoIDs.Completa, Descripcion="Segunda Mora"}             
             };
                 cuotacodigos.ForEach(s => context.CuotaCodigos.Add(s));
                 context.SaveChanges();
 
 
-
+                var calendarioVtos = new List<CalendarioVto> { 
+                new CalendarioVto { ID = 1, Descripcion = "Default" }
+            };
+                calendarioVtos.ForEach(s => context.CalendarioVtos.Add(s));
+                context.SaveChanges();
        
 
                 var cursos = new List<Curso> { 
@@ -87,7 +92,8 @@ namespace AdminNG.DAL
                 new Curso { ID = 3, Codigo = "C3", Nivel = 3 } ,
                 new Curso { ID = 4, Codigo = "C4", Nivel = 4 } ,
                 new Curso { ID = 5, Codigo = "C5", Nivel = 5 } ,
-                 new Curso { ID = 6, Codigo = "C6", Nivel = 6 } 
+                new Curso { ID = 6, Codigo = "C6", Nivel = 6 } ,
+                new Curso { ID = 100, Codigo = "COM", Nivel = 7 } 
             };
                 cursos.ForEach(s => context.Cursos.Add(s));
                 context.SaveChanges();
@@ -106,19 +112,26 @@ namespace AdminNG.DAL
 
 
                 var alumnos = new List<Alumno> {
-                new Alumno{  Apellido= "Ape 1", Nombre="Nombre 1", Familia= familias[1] },
-                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2", Familia= familias[2] },
-                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2 hermano", Familia= familias[2] },
-                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3", Familia= familias[3] },
-                new Alumno{  Apellido= "Ape 4", Nombre="Nombre 4" , Familia= familias[4]},
-                new Alumno{  Apellido= "Ape 5", Nombre="Nombre 5" , Familia= familias[5]},
-                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3 Repetido", Familia= familias[6] },
+                new Alumno{  Apellido= "Ape 1", Nombre="Nombre 1", Familia= familias[1] , Comedor=true},
+                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2", Familia= familias[2] , Comedor=true},
+                new Alumno{  Apellido= "Ape 2", Nombre="Nombre 2 hermano", Familia= familias[2] , Comedor=true},
+                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3", Familia= familias[3] , Comedor=false},
+                new Alumno{  Apellido= "Ape 4", Nombre="Nombre 4" , Familia= familias[4], Comedor=true},
+                new Alumno{  Apellido= "Ape 5", Nombre="Nombre 5" , Familia= familias[5], Comedor=false},
+                new Alumno{  Apellido= "Ape 3", Nombre="Nombre 3 Repetido", Familia= familias[6], Comedor=true },
             };
                 alumnos.ForEach(s => context.Alumnos.Add(s));
                 context.SaveChanges();
 
-                var inscripciones = new List<Inscripcion>();
-                alumnos.ForEach(s => inscripciones.Add(new Inscripcion { Alumno = s, Curso = cursos.Find(c => c.ID == 7-s.ID), FechaAlta = DateTime.Now }));
+                var inscripciones = new List<Inscripcion>{
+                new Inscripcion {  AlumnoID = 1, CursoID = 1, FechaAlta= DateTime.Now, CuotaCodigoID= (int)CargoCodigo.CargoCodigoIDs.Completa },
+                new Inscripcion {  AlumnoID = 2, CursoID = 1, FechaAlta= DateTime.Now, CuotaCodigoID= (int)CargoCodigo.CargoCodigoIDs.Completa },
+                new Inscripcion  {  AlumnoID = 3, CursoID = 1, FechaAlta= DateTime.Now, CuotaCodigoID= (int)CargoCodigo.CargoCodigoIDs.SegundoHijo },
+                new Inscripcion  {  AlumnoID = 4, CursoID = 1, FechaAlta= DateTime.Now, CuotaCodigoID= (int)CargoCodigo.CargoCodigoIDs.Completa },
+                new Inscripcion  {  AlumnoID = 5, CursoID = 2, FechaAlta= DateTime.Now, CuotaCodigoID= (int)CargoCodigo.CargoCodigoIDs.Completa },
+                new Inscripcion  {  AlumnoID = 6, CursoID = 2, FechaAlta= DateTime.Now, CuotaCodigoID= (int)CargoCodigo.CargoCodigoIDs.Completa }
+                };
+               // alumnos.ForEach(s => inscripciones.Add(new Inscripcion { Alumno = s, Curso = cursos.Find(c => c.ID == 7-s.ID), FechaAlta = DateTime.Now }));
 
                 inscripciones.ForEach(s => context.Inscripciones.Add(s));
                 context.SaveChanges();

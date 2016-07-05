@@ -11,7 +11,7 @@ namespace AdminNG.Models
         public enum IDS : int
         {
             Bulnes = 1,
-            Paunero = 2
+            Ugarteche = 2
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }

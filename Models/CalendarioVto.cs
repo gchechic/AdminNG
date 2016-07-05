@@ -7,17 +7,18 @@ using System.Web;
 
 namespace AdminNG.Models
 {
-    [Table("FormaPagos")]
-    public class FormaPago
+    public class CalendarioVto
     {
-        public enum IDS:int
+        public enum IDS
         {
-            Contado = 1,
-            Bancario
+            Default =1
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
-          [Required]
-        public string Descripcion { get; set; } 
+        [Required]
+        public string Descripcion{ get; set; }
+
+        public virtual ICollection<CalendarioVtoItem> CalendarioVtoItems { get; set; }
+     
     }
 }

@@ -6,15 +6,17 @@ using System.Web;
 
 namespace AdminNG.Models
 {
-    public class CuotaValor
+    public class CargoValor
     {
         public int ID { get; set; }
+        public int CuotaCodigoID { get; set; }
+        public int CursoID { get; set; }
         [Required]        
         public DateTime FechaDesde{ get; set; }
         [Required]
         public double Valor{ get; set; }
         [Required]
-        public virtual CuotaCodigo CuotaCodigo { get; set; }
+        public virtual CargoCodigo CuotaCodigo { get; set; }
         [Required]
         public virtual Curso Curso { get; set; }
 
