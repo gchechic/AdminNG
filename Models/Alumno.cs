@@ -11,17 +11,19 @@ namespace AdminNG.Models
     public class Alumno
     {
         public int ID { get; set; }
-        public int FamiliaID { get; set; } 
+        public int FamiliaID { get; set; }         
         [Required]
-        public string Apellido { get; set; }
+        [StringLength(100)]
+        public string Apellido { get; set; }        
         [Required]
+        [StringLength(100)]
         public string Nombre { get; set; }
-        public bool Comedor { get; set; }
+        
         public virtual Familia Familia { get; set; }
         public virtual ICollection<Inscripcion> Inscripciones { get; set; }
         public  virtual  Inscripcion InscripcionActiva { get
             {
-            return Inscripciones.FirstOrDefault ( i => i.FechaAlta <= DateTime.Now && (i.FechaBaja == null || i.FechaBaja >= DateTime.Now ));
+            return Inscripciones.FirstOrDefault ( i => i.CursoID != Curso.ComedorID && i.FechaAlta <= DateTime.Now && (i.FechaBaja == null || i.FechaBaja >= DateTime.Now ));
             }
         }
     }

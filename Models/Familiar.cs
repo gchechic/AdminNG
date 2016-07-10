@@ -11,8 +11,11 @@ namespace AdminNG.Models
     {
         public int ID { get; set; }
         public int FamiliaID { get; set; }
-//        [Required]
+        [Required]
+        [MaxLength(100)]
         public string Apellido { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string Nombre { get; set; }        
         [EmailAddress]        
         public string Email { get; set; }
