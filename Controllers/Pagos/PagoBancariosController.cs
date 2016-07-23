@@ -16,12 +16,12 @@ namespace AdminNG.Controllers
     public class PagoBancariosController : Controller
     {
         private AdminNGContext db = new AdminNGContext();
-        private Repositorio _repositorio = new Repositorio();
-        private Business.Pago BSPago;
+        private DBResponsable _repositorio = new DBResponsable();
+        private Business.BSPago BSPago;
 
         public PagoBancariosController()
         {
-            BSPago = new Business.Pago();
+            BSPago = new Business.BSPago();
 
         }
         // GET: PagoBancarios/Details/5
@@ -69,7 +69,7 @@ namespace AdminNG.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "FamiliaID,ResponsableID,ComprobanteNumero,EsDeposito,Fecha,Importe,DetalleBancario,Observaciones")] PagoBancario pagoBancario)
         {
-            AdminNG.Business.Pago BSPago = new Business.Pago();
+            AdminNG.Business.BSPago BSPago = new Business.BSPago();
             var responsables = _repositorio.GetResonsablesNoR();
             pagoBancario.SedeID = (int)Session["SedeID"]; //sacarlo del usuario
             if (await BSPago.CrearPagoBancario(pagoBancario, ModelState))

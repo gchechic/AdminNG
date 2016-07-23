@@ -34,9 +34,11 @@ namespace AdminNG.DAL
 
 
         public DbSet<MovimientoCuenta> MovimientoCuentas { get; set; }
+        public DbSet<MovimientoCargo> MovimientoCargos { get; set; }
         public DbSet<CargoCuota> CargoCuotas { get; set; }
         public DbSet<CargoComedor> CargoComedores { get; set; }
         public DbSet<CargoMora> CargoMoras { get; set; }
+        
         
         public DbSet<CargoValor> CargoValores { get; set; }
 
@@ -69,7 +71,7 @@ namespace AdminNG.DAL
             //modelBuilder.Entity<MovimientoCargo>().HasOptional(f => f.Inscripcion).WithRequired().WillCascadeOnDelete(false);
                
 
-            modelBuilder.Entity<Pago>().ToTable("Pagos");   
+            //modelBuilder.Entity<Pago>().ToTable("Pagos");   
 
         }
 

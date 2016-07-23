@@ -16,10 +16,10 @@ namespace AdminNG.Controllers
     public class PagoContadosController : Controller
     {
         private AdminNGContext db = new AdminNGContext();
-        private AdminNG.Business.Pago BSPago;
+        private AdminNG.Business.BSPago BSPago;
         public PagoContadosController()
         {
-            BSPago = new Business.Pago();
+            BSPago = new Business.BSPago();
         }
         // GET: PagoContados
         public ActionResult Index()
@@ -131,7 +131,7 @@ namespace AdminNG.Controllers
         {
             try
             {
-                AdminNG.Business.Pago BSPago = new Business.Pago();
+                AdminNG.Business.BSPago BSPago = new Business.BSPago();
 
                 pagoContado.Usuario = System.Web.HttpContext.Current.User.Identity.Name;
                 pagoContado.SedeID = (int)Session["SedeID"]; 

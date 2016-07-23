@@ -11,7 +11,8 @@ namespace AdminNG.Models
     [Table("Cursos")]
     public class Curso
     {
-        public const int ComedorID = 100;
+        public enum IDS: int
+        { Comedor =100}
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
         [Required]

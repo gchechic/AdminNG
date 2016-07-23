@@ -16,24 +16,25 @@ namespace AdminNG.Controllers
     public class  PagosController : Controller
     {
         private AdminNGContext db = new AdminNGContext();
-        private AdminNG.Business.Pago BSPago;
-        private Repositorio _repositorio = new Repositorio();
+        private AdminNG.Business.BSPago BSPago;
+        private DBResponsable _dbResponsable = new DBResponsable();
 
         public PagosController()
         {
-            BSPago = new Business.Pago();
+            BSPago = new Business.BSPago();
         }
         // GET: Pagos
         public async Task<ActionResult> Index()
         {
             var pagos = db.Pagos.Include(p => p.Familia).Include(p => p.FormaPago).Include(p => p.Responsable).Include(p => p.Sede);
+            var l = pagos.ToList();
             return View(await pagos.ToListAsync());
         }
 
         // GET: Pagos/Renumerar/5
         public ActionResult Renumerar(int? id)
         {
-            var responsables = _repositorio.GetResonsablesNoR();
+            var responsables = _dbResponsable.GetResonsablesNoR();
 
              if (id == null)
             {
@@ -69,7 +70,7 @@ namespace AdminNG.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Renumerar([Bind(Include = "ID,ResponsableNuevoID,NumeroNuevo")] ViewModels.VMPagoRenumerar vmpago)
         {
-            var responsables = _repositorio.GetResonsablesNoR();
+            var responsables = _dbResponsable.GetResonsablesNoR();
             Pago pago = db.Pagos.Find(vmpago.ID);
             if (pago == null)
             {
@@ -81,7 +82,7 @@ namespace AdminNG.Controllers
                 // que no exista el nuevo nro
 
                 //Se crea un pago para anular
-                Pago nuevoPago = new Pago();
+                Pago nuevoPago = new PagoContado();
                 //copiar todas las propiedades                
                 nuevoPago.FamiliaID = pago.FamiliaID;
                 nuevoPago.Fecha = pago.Fecha;

@@ -180,10 +180,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Business\CargoValor.cs" />
-    <Compile Include="Business\MovimientoCuenta.cs" />
-    <Compile Include="Business\Pago.cs" />
-    <Compile Include="Business\CalendarioVto.cs" />
+    <Compile Include="Business\BSBase.cs" />
+    <Compile Include="Business\BSCargoValor.cs" />
+    <Compile Include="Business\BSCuota.cs" />
+    <Compile Include="Business\BSMovimientoCuenta.cs" />
+    <Compile Include="Business\BSPago.cs" />
+    <Compile Include="Business\BSCalendarioVto.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumnosController.cs" />
     <Compile Include="Controllers\Cargos\CargoComedoresController.cs" />
@@ -200,9 +202,19 @@
     <Compile Include="Controllers\Pagos\PagoBancariosController.cs" />
     <Compile Include="DAL\AdminNGContext.cs" />
     <Compile Include="DAL\AdminNGInitializer.cs" />
+    <Compile Include="DAL\DBCuota.cs" />
+    <Compile Include="DAL\DBAlumno.cs" />
+    <Compile Include="DAL\DBBase.cs" />
+    <Compile Include="DAL\DBCargo.cs" />
+    <Compile Include="DAL\DBCurso.cs" />
+    <Compile Include="DAL\DBInscripcion.cs" />
+    <Compile Include="DAL\DBMora.cs" />
+    <Compile Include="DAL\DBMovimientoCargo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Configuracion.cs" />
+    <Compile Include="Models\CtaCte\CargoTipo.cs" />
     <Compile Include="Models\CtaCte\MovimientoCargo.cs" />
     <Compile Include="Models\Proceso.cs" />
     <Compile Include="Models\Seguridad\AccountViewModels.cs" />
@@ -217,7 +229,7 @@
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Pagos\Pago.cs" />
     <Compile Include="Models\Pagos\PagoBancario.cs" />
-    <Compile Include="Models\Repositorio.cs" />
+    <Compile Include="DAL\DBResponsable.cs" />
     <Compile Include="Models\Responsable.cs" />
     <Compile Include="Models\Familia.cs" />
     <Compile Include="Models\Familiar.cs" />
@@ -364,7 +376,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Resources.resx" />
+    <EmbeddedResource Include="Resources\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

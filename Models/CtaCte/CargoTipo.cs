@@ -5,22 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace AdminNG.Models
+namespace AdminNG.Models.CtaCte
 {
-    [Table("CalendarioVto")]
-    public class CalendarioVto
+    [Table("CargoTipos")]
+    public class CargoTipo
     {
-        public enum IDS
+        public enum IDS : int
         {
-            Default =1
+            Cuota,
+            Mora,
+            Comedor
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
         [Required]
-        [MaxLength(20)]
-        public string Descripcion{ get; set; }
-      
-        public virtual ICollection<CalendarioVtoItem> CalendarioVtoItems { get; set; }
-     
+        public string Descripcion { get; set; } 
     }
 }
