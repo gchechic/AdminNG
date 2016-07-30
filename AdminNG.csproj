@@ -182,10 +182,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\BSBase.cs" />
     <Compile Include="Business\BSCargoValor.cs" />
+    <Compile Include="Business\BSComedor.cs" />
     <Compile Include="Business\BSCuota.cs" />
+    <Compile Include="Business\BSInscripcion.cs" />
+    <Compile Include="Business\BSMora.cs" />
     <Compile Include="Business\BSMovimientoCuenta.cs" />
     <Compile Include="Business\BSPago.cs" />
     <Compile Include="Business\BSCalendarioVto.cs" />
+    <Compile Include="Business\BSProceso.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumnosController.cs" />
     <Compile Include="Controllers\Cargos\CargoComedoresController.cs" />
@@ -214,6 +218,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Configuracion.cs" />
+    <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Models\CtaCte\CargoTipo.cs" />
     <Compile Include="Models\CtaCte\MovimientoCargo.cs" />
     <Compile Include="Models\Proceso.cs" />
@@ -243,6 +248,11 @@
     <Compile Include="Models\Pagos\PagoContado.cs" />
     <Compile Include="Models\Sede.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CursoAlumnosGroup.cs" />
     <Compile Include="ViewModels\Alumnos\VMAlumno.cs" />
@@ -254,7 +264,7 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Scripts\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -376,8 +386,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Resources.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

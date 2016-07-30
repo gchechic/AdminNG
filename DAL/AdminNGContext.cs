@@ -71,7 +71,8 @@ namespace AdminNG.DAL
             //modelBuilder.Entity<MovimientoCargo>().HasOptional(f => f.Inscripcion).WithRequired().WillCascadeOnDelete(false);
                
 
-            //modelBuilder.Entity<Pago>().ToTable("Pagos");   
+            modelBuilder.Entity<Pago>().ToTable("Pagos");
+           // modelBuilder.Entity<MovimientoCargo>().ToTable("Cargos"); 
 
         }
 

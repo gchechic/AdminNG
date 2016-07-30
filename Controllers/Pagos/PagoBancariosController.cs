@@ -21,7 +21,7 @@ namespace AdminNG.Controllers
 
         public PagoBancariosController()
         {
-            BSPago = new Business.BSPago();
+            BSPago = new Business.BSPago(db);
 
         }
         // GET: PagoBancarios/Details/5
@@ -69,9 +69,10 @@ namespace AdminNG.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "FamiliaID,ResponsableID,ComprobanteNumero,EsDeposito,Fecha,Importe,DetalleBancario,Observaciones")] PagoBancario pagoBancario)
         {
-            AdminNG.Business.BSPago BSPago = new Business.BSPago();
+            AdminNG.Business.BSPago BSPago = new Business.BSPago(db);
             var responsables = _repositorio.GetResonsablesNoR();
             pagoBancario.SedeID = (int)Session["SedeID"]; //sacarlo del usuario
+            pagoBancario.Usuario = System.Web.HttpContext.Current.User.Identity.Name;
             if (await BSPago.CrearPagoBancario(pagoBancario, ModelState))
             {
                 return RedirectToAction("Index","Pagos");

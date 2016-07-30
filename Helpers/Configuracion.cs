@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -14,7 +15,7 @@ namespace AdminNG.Helpers
         {
             get
             {
-                return Single.Parse(WebConfigurationManager.AppSettings["PorcCuotaImpaga"]);
+                return Single.Parse(WebConfigurationManager.AppSettings["PorcCuotaImpaga"], new CultureInfo("en-US"));
             }
         }
         public static string UsuarioSistema

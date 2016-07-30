@@ -21,7 +21,7 @@ namespace AdminNG.Controllers
 
         public PagosController()
         {
-            BSPago = new Business.BSPago();
+            BSPago = new Business.BSPago(db);
         }
         // GET: Pagos
         public async Task<ActionResult> Index()
