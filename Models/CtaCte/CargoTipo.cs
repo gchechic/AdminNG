@@ -13,7 +13,7 @@ namespace AdminNG.Models.CtaCte
         public enum IDS : int
         {
             Cuota,
-            Mora,
+            GtoAdm,
             Comedor
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

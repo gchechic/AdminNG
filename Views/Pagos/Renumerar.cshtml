@@ -1,0 +1,113 @@
+﻿@model AdminNG.ViewModels.VMPagoRenumerar
+
+@{
+    ViewBag.Title = "Renumerar";
+}
+
+<h2>Renumerar</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    <h4>Pago</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago.Familia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago.Familia.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago.FormaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago.FormaPago.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago.Fecha)
+        </dd>
+
+        <dt>         
+            @Html.DisplayNameFor(model => model.Pago.Importe)
+        </dt>
+
+        <dd>
+            @(Model.Pago.Importe*-1)
+            @*@Html.DisplayFor(model => model.Pago.Importe )*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago.Observaciones)
+        </dd>
+
+        <dt>
+           @Html.DisplayNameFor(model => model.Pago.Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago.Responsable.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago.ComprobanteNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago.ComprobanteNumero)
+        </dd>
+    </dl>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.ResponsableNuevoID, "Responsable Nuevo", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("ResponsableNuevoID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ResponsableNuevoID, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.NumeroNuevo, "Numero Nuevo", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.NumeroNuevo, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.NumeroNuevo, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+</div>
+}
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@section Scripts {
+<script type="text/javascript">
+    $("#ResponsableNuevoID").change(function () {
+        var url = "/Pagos/UltimoNumero";
+        var rid = $("#ResponsableNuevoID").val();
+        if (rid != 0) {
+            $.get(url, { ResponsableID: rid }, function (data) {
+                $("#NumeroNuevo").val(data);
+            });
+        }
+        else
+            $("#NumeroNuevo").val(0);
+    });
+</Script>
+}

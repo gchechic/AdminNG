@@ -1,4 +1,4 @@
-﻿@model AdminNG.Models.Pagos.Pago.PagosBancario
+﻿@model AdminNG.Models.Pagos.PagoBancario
 
 @{
     ViewBag.Title = "Create";
@@ -12,18 +12,34 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Transferencia</h4>
+        <h4>Pago Bancario</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FamiliaID, "Familia", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Familia.Descripcion)
+        <div class="row">
+            <div class="col col-md-1 col-md-offset-1">
+                @Html.LabelFor(model => model.FamiliaID, "Familia")
+            </div>
+            <div class="col-md-2 label-default">
+                    @Html.DisplayFor(model => model.Familia.Descripcion)
+            </div>
+            <div class="col col-md-1">
+                @Html.Label("Saldo");
+            </div>
+            <div class="col-md-1 alert-info">
+
+                @Html.Label("", Convert.ToString((double)ViewBag.Saldo), new { id = "lblSaldo" })
+
+            </div>
+            <div class="row">
+                <div class="col col-md-12">
+                    <b
+                </div>
             </div>
         </div>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.ResponsableID, "ResponsableID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ResponsableID, "Responsable", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ResponsableID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ResponsableID, "", new { @class = "text-danger" })
@@ -64,6 +80,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaFactura, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaFactura, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaFactura, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DetalleBancario, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -89,10 +112,42 @@
 }
 
 <div>
-    @Html.ActionLink("Volver", null, null, null, new { href = Request.UrlReferrer })
+    @*@Html.ActionLink("Volver", null, null, null, new { href = Request.UrlReferrer })*@
+    @Html.ActionLink("Back to List", "Index", "Pagos")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+
+        $("#ResponsableID").change(function () {
+            var url = "/Pagos/UltimoNumero";
+            var rid = $("#ResponsableID").val();
+            if (rid != 0) {
+                $.get(url, { ResponsableID: rid }, function (data) {
+                    $("#ComprobanteNumero").val(data);
+                });
+            }
+            else
+                $("#ComprobanteNumero").val(0);
+
+            var saldo = $("#lblSaldo").text();
+            $("#lblSaldo").text(saldo * 2);
+        });
+        $("#Fecha").change(function () {
+            var url = "/Pagos/Saldo";
+
+            var fid = @Html.Raw(Json.Encode(Model.FamiliaID));
+            //var fecha = new Date( $("#Fecha").val()).toISOString();
+            // fecha = new Date( $("#Fecha").val()).toLocaleDateString();
+            fecha = $("#Fecha").val();
+            if (fid != 0) {
+                $.get(url, { FamiliaID: fid, strFecha: fecha }, function (data) {
+                    $("#lblSaldo").text(data);
+                });
+            }
+
+        });
+    </script>
 }

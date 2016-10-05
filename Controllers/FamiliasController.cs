@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using AdminNG.DAL;
 using AdminNG.Models;
+using AdminNG.ViewModels;
+using AdminNG.Business;
 
 namespace AdminNG.Controllers
 {
@@ -114,6 +116,26 @@ namespace AdminNG.Controllers
             db.Familia.Remove(familia);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Ficha(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Familia familia = db.Familia.Find(id);
+            if (familia == null)
+            {
+                return HttpNotFound();
+            }
+            db.Entry(familia).Collection(f => f.Alumnos).Load();
+            VMFicha vmFicha = new VMFicha();
+            vmFicha.Familia = familia;
+            BSMovimientoCuenta bsMovimientoCuenta = new BSMovimientoCuenta(db);
+            vmFicha.Saldo = bsMovimientoCuenta.Saldo(id.Value);
+            vmFicha.CargosPendientes = db.MovimientoCargos.Where(c => c.FamiliaID == id && c.Saldo > 0).OrderBy(c => c.Fecha).ThenBy(c => c.ID).ToList();
+            return View(vmFicha);
         }
 
         protected override void Dispose(bool disposing)

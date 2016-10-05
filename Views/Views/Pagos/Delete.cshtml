@@ -1,0 +1,112 @@
+﻿@model AdminNG.Models.Pago
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Pago</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Familia.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Familia.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FormaPago.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormaPago.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsable.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsable.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sede.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sede.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComprobanteNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComprobanteNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anulado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anulado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioNombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

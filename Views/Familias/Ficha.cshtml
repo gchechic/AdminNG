@@ -1,0 +1,93 @@
+﻿@model AdminNG.ViewModels.VMFicha
+
+@{
+    ViewBag.Title = "Ficha";
+}
+
+<h2>Ficha</h2>
+
+<div>
+    <h4>Familia @Html.DisplayFor(model => model.Familia.Descripcion)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Saldo)
+        </dd>
+    </dl>
+    @if (Model.Familia.Alumnos != null)
+    {
+        <h4>Alumnos</h4>
+        <table class="table">
+            <tr>
+               
+                <th>Nombre</th>
+                <th>Curso</th>
+                <th>Codigo Valor</th>              
+            </tr>
+
+            @foreach (var item in Model.Familia.Alumnos)
+            {               
+                <tr >                                    
+                    <td>
+                        @item.Nombre                        
+                    </td>
+                    <td>
+                        @if (item.InscripcionActiva!=null)
+                        { @item.InscripcionActiva.Curso.Codigo; }
+                         
+                    </td>
+                    <td>
+                        @if (item.InscripcionActiva != null)
+                        { @item.InscripcionActiva.CargoCodigoValor.Descripcion; }
+                        
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    Ingresar Pago:@Html.ActionLink("Recibo", "CreateRecibo", "PagoContados", new { FamiliaID = Model.Familia.ID}, null)     |
+    @Html.ActionLink("Bancario", "Create", "PagoBancarios", new { FamiliaID = Model.Familia.ID }, null)
+
+    @if (Model.CargosPendientes != null)
+    {
+        <h4>Cargos Pendientes</h4>
+        <table class="table">
+            <tr>
+                <th>Tipo</th>
+                <th>Curso</th>
+                <th>Mes</th>
+                <th>Importe</th>
+                <th>Saldo</th>
+            </tr>
+
+            @foreach (var item in Model.CargosPendientes)
+            {
+                <tr>
+                    <td>
+                        @item.MovimientoCuentaTipo.Descripcion
+                    </td>
+                    <td>
+                        @item.Inscripcion.Curso.Codigo
+                    </td>
+                    <td>
+                       @item.Mes
+                    </td>
+                    <td>
+                        @item.Importe
+                    </td>
+                    <td>
+                        @item.Saldo
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Familia.ID }) |
+    @Html.ActionLink("Volver", null, null, null, new { href = Request.UrlReferrer })
+</p>

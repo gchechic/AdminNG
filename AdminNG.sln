@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminNG", "AdminNG.csproj", "{2B72C5B9-BB6C-490A-B397-E64F5CA4CB97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminNG.Tests", "..\AdminNG.Tests\AdminNG.Tests.csproj", "{AD1B9E46-19A5-4CB7-94A1-F168D6B950A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NestedCollectionModels", "..\NestedCollectionModels\NestedCollectionModels.csproj", "{591AEBA5-C6BB-4932-9B4E-2782F673C0D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2B72C5B9-BB6C-490A-B397-E64F5CA4CB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B72C5B9-BB6C-490A-B397-E64F5CA4CB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B72C5B9-BB6C-490A-B397-E64F5CA4CB97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1B9E46-19A5-4CB7-94A1-F168D6B950A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1B9E46-19A5-4CB7-94A1-F168D6B950A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1B9E46-19A5-4CB7-94A1-F168D6B950A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1B9E46-19A5-4CB7-94A1-F168D6B950A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591AEBA5-C6BB-4932-9B4E-2782F673C0D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591AEBA5-C6BB-4932-9B4E-2782F673C0D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591AEBA5-C6BB-4932-9B4E-2782F673C0D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591AEBA5-C6BB-4932-9B4E-2782F673C0D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

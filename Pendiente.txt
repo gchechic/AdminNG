@@ -1,0 +1,9 @@
+﻿- Dinamicamente cambiar el monto del pago cuando se cambia la fecha 
+Mostrar mora calculada en la ficha
+- No generar cuotas con saldo 0
+- Configurar calendario jquery para cambiar meses y poner maximos y minimos
+- En pagos bancarios usar la fecha real para calcular la mora y no la del recibo
+- usar campo cantidad en movimientos cargos
+
+
+sqllocaldb p MSSQLLocalDB

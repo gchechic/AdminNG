@@ -18,19 +18,19 @@ namespace AdminNG.Business
         {
             List<CargoComedor> listComedores = new List<CargoComedor>();
             BSInscripcion bsInscripcion = new BSInscripcion(db);
-            bsInscripcion.getInscripcionesComedorVigentesMes(mes-1).ForEach(i => listComedores.Add(GetComedor(i, mes)));//Vigentes al mes anterior
+            bsInscripcion.getInscripcionesComedorVigentesMes(mes).ForEach(i => listComedores.Add(GetComedor(i, mes)));//Vigentes al mes anterior
 
-            return listComedores;
+            return listComedores.Where( c=>c.Importe >0).ToList();
         }
-        public CargoComedor GetComedor(Inscripcion inscripcion, int mes)
+        public CargoComedor GetComedor(Inscripcion inscripcionComedor, int mes)
         {
             DateTime dtFechaCalculo = new DateTime(DateTime.Today.Year, mes, 1); // primero del mes 
-            int codigoValorID = inscripcion.CargoCodigoValorID;
-            double valor = BSCargoValor.GetValor(inscripcion.CursoID, inscripcion.CargoCodigoValorID, dtFechaCalculo);
+            int codigoValorID = inscripcionComedor.CargoCodigoValorID;
+            double valor = BSCargoValor.GetValor(inscripcionComedor.CursoID, inscripcionComedor.CargoCodigoValorID, dtFechaCalculo);
             CargoComedor comedor = new CargoComedor
             {
-                FamiliaID = inscripcion.Alumno.FamiliaID,
-                InscripcionID = inscripcion.ID,
+                FamiliaID = inscripcionComedor.Alumno.FamiliaID,
+                InscripcionID = inscripcionComedor.ID,
                 Fecha = dtFechaCalculo,
                 Mes = mes,
                 CargoCodigoValorID = codigoValorID,

@@ -1,4 +1,4 @@
-﻿@model AdminNG.Models.Pagos.Pago.PagosBancario
+﻿@model AdminNG.Models.Pagos.PagoBancario
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>PagoBancario</h4>
+    <h4>Pago Bancario</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -63,7 +63,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Importe)
+            @(Model.Importe * -1)
+       @*     @Html.DisplayFor(model => model.Importe)*@
         </dd>
 
 
@@ -71,20 +72,24 @@
         <dt>
             @Html.DisplayNameFor(model => model.EsDeposito)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.EsDeposito)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Observaciones)
+            @Html.DisplayNameFor(model => model.FechaBanco)
         </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaBanco)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DetalleBancario)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.DetalleBancario)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.Observaciones)
         </dd>
@@ -99,6 +104,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+   @* @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
     @Html.ActionLink("Volver", null, null, null, new { href = Request.UrlReferrer })
 </p>

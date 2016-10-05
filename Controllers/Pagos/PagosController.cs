@@ -10,6 +10,9 @@ using System.Web.Mvc;
 using AdminNG.DAL;
 using AdminNG.Models;
 using AdminNG.Models.Pagos;
+using AdminNG.Helpers;
+using System.Data.Entity.Infrastructure;
+using AdminNG.Business;
 
 namespace AdminNG.Controllers
 {
@@ -27,7 +30,9 @@ namespace AdminNG.Controllers
         public async Task<ActionResult> Index()
         {
             var pagos = db.Pagos.Include(p => p.Familia).Include(p => p.FormaPago).Include(p => p.Responsable).Include(p => p.Sede);
+            
             var l = pagos.ToList();
+            //l.ForEach( p=> p.Importe *= -1); // cambiar signo
             return View(await pagos.ToListAsync());
         }
 
@@ -46,8 +51,6 @@ namespace AdminNG.Controllers
                 return HttpNotFound();
             }
            
-           
-            //pago.ComprobanteNumero = BSPago.PagoComprobanteNumeroUltimo(ResponsableNuevoID) + 1;
             ViewModels.VMPagoRenumerar vmPago = new ViewModels.VMPagoRenumerar();
             //Sugerir responsable y numero
             int ResponsableNuevoID = BSPago.PagoResponsableIDInicial(pago.FamiliaID);
@@ -76,12 +79,15 @@ namespace AdminNG.Controllers
             {
                 return HttpNotFound();
             }
-            if (ModelState.IsValid)
-            {
-                ///TODO:Validar
-                // que no exista el nuevo nro
 
-                //Se crea un pago para anular
+            // Validar que no exista el nuevo nro
+            if (db.Pagos.Any(p => p.ResponsableID == vmpago.ResponsableNuevoID && p.ComprobanteNumero == vmpago.NumeroNuevo))
+            {
+                ModelState.AddModelError("NumeroNuevo", "numero existente");              
+            }
+            else if (ModelState.IsValid)
+            {
+                //Se crea un pago para anular copiando el anterior
                 Pago nuevoPago = new PagoContado();
                 //copiar todas las propiedades                
                 nuevoPago.FamiliaID = pago.FamiliaID;
@@ -96,52 +102,68 @@ namespace AdminNG.Controllers
                 nuevoPago.SedeID = (int)Session["SedeID"];
                 nuevoPago.FechaAlta = DateTime.Now;
                 nuevoPago.Usuario = System.Web.HttpContext.Current.User.Identity.Name;
-                nuevoPago.Observaciones = string.Format("Renumerado a: Responsable: {0} Numero: {1}", pago.Responsable.Nombre, pago.ComprobanteNumero);
+                nuevoPago.Observaciones = string.Format("Renumerado a: Responsable: {0} Numero: {1}", db.Responsables.Find(vmpago.ResponsableNuevoID).Nombre, vmpago.NumeroNuevo);
                 nuevoPago.Anulado = true;
 
                 //Cambios al pago actual
-                pago.ResponsableID = vmpago.ResponsableNuevoID;
+                pago.ResponsableID = vmpago.ResponsableNuevoID;              
                 pago.ComprobanteNumero = vmpago.NumeroNuevo;
 
-                db.Pagos.Add(nuevoPago);
-                db.Entry(pago).State = EntityState.Modified;
-                db.SaveChanges();
+              
+                if (TryUpdateModel(pago, "", new string[] { "ResponsableID", "ComprobanteNumero" }))
+                {
+                    try
+                    {
+                        db.Pagos.Add(nuevoPago);
+                        db.SaveChanges();
 
-                return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
+                    catch (RetryLimitExceededException ex)
+                    {
+                        LogHelper.LogExcepcion(ex);
+                        ModelState.AddModelError("", AdminNG.Properties.Resources.UnableToSaveChanges);
+                    }
+                }
+                //db.Entry(pago).State = EntityState.Modified;
+                //db.SaveChanges();
+
+                //return RedirectToAction("Index");
             }
             vmpago.Pago = pago;
             ViewBag.ResponsableNuevoID = new SelectList(responsables, "ID", "Nombre", vmpago.ResponsableNuevoID);               
             return View(vmpago);
         }
-        // GET: Pagos/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pago pago = await db.Pagos.FindAsync(id);
-            if (pago == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pago);
-        }
 
-        // POST: Pagos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Pago pago = await db.Pagos.FindAsync(id);
-            db.Pagos.Remove(pago);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //// GET: Pagos/Delete/5
+        //public async Task<ActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Pago pago = await db.Pagos.FindAsync(id);
+        //    if (pago == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(pago);
+        //}
 
-       
+        //// POST: Pagos/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(int id)
+        //{
+        //    Pago pago = await db.Pagos.FindAsync(id);
+        //    db.Pagos.Remove(pago);
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
+   
        
         // GET: Pagoss/Details/5/1
+
         public ActionResult Details(int? id)
         {
             if (id == null )
@@ -153,8 +175,8 @@ namespace AdminNG.Controllers
             {
                 return HttpNotFound();
             }
-            if (pago.Anulado)
-                return View(pago);
+            //if (pago.Anulado)
+            //    return View(pago);
             int FormaPagoid = pago.FormaPagoID;
             switch (FormaPagoid)
             {
@@ -162,10 +184,6 @@ namespace AdminNG.Controllers
                     return RedirectToAction("Details", "PagoContados", new {id = id});
                 case (int) FormaPago.IDS.Bancario:
                     return RedirectToAction("Details", "PagoBancarios", new { id = id });
-            }
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             return View(pago);        
@@ -184,6 +202,15 @@ namespace AdminNG.Controllers
         public int UltimoNumero(int ResponsableID)
         {
             return BSPago.PagoComprobanteNumeroUltimo(ResponsableID)+1;
+        }
+
+        public double Saldo(int FamiliaID, string strFecha)
+        {
+            DateTime Fecha = DateTime.Parse(strFecha);
+            AdminNG.Business.BSFicha bsFicha = new BSFicha(db);
+            var saldo = bsFicha.Saldo(FamiliaID, Fecha);
+           
+            return saldo;
         }
     }
 }
