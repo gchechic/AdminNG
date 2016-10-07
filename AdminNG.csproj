@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -224,6 +225,7 @@
     <Compile Include="Models\CtaCte\CargoTipo.cs" />
     <Compile Include="Models\CtaCte\Imputacion.cs" />
     <Compile Include="Models\CtaCte\MovimientoCargo.cs" />
+    <Compile Include="Models\HtmlHelpers.cs" />
     <Compile Include="Models\Proceso.cs" />
     <Compile Include="Models\Seguridad\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
@@ -272,6 +274,7 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Pendiente.txt" />
+    <Content Include="Scripts\Custom.js" />
     <Content Include="Scripts\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -381,6 +384,9 @@
     <Content Include="Views\MovimientoCuentas\Edit.cshtml" />
     <Content Include="Views\MovimientoCuentas\Index.cshtml" />
     <Content Include="Views\Familias\Ficha.cshtml" />
+    <Content Include="Views\Pagos\Create - Copy.cshtml" />
+    <Content Include="Views\Pagos\EditorTemplates\VMPagoCrear.cshtml" />
+    <Content Include="Views\Pagos\EditorTemplates\VMPagoItemCheque.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

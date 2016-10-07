@@ -1,0 +1,23 @@
+﻿@model AdminNG.ViewModels.Pagos.VMPagoCrear
+@using AdminNG.Models
+
+@Html.HiddenFor(x => x.ID)
+
+<p>
+    <label>Comprobante</label>
+    @Html.TextBoxFor(x => x.ComprobanteNumero)
+</p>
+
+<p>
+    <label>Salary</label>
+    @Html.TextBoxFor(x => x.ImporteEfectivo)
+</p>
+
+<div id="pagoItemsCheque">
+    @Html.EditorFor(x => x.ItemsCheque)
+</div>
+
+
+<p>
+    @Html.AddLink("Agregar Cheque", "#pagoItemsCheque", ".itemCheque", "ItemsCheque", typeof(AdminNG.ViewModels.Pagos.VMPagoItemCheque))
+</p>

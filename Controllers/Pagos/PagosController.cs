@@ -13,6 +13,8 @@ using AdminNG.Models.Pagos;
 using AdminNG.Helpers;
 using System.Data.Entity.Infrastructure;
 using AdminNG.Business;
+using AdminNG.ViewModels;
+using AdminNG.ViewModels.Pagos;
 
 namespace AdminNG.Controllers
 {
@@ -26,6 +28,8 @@ namespace AdminNG.Controllers
         {
             BSPago = new Business.BSPago(db);
         }
+
+
         // GET: Pagos
         public async Task<ActionResult> Index()
         {
@@ -34,6 +38,47 @@ namespace AdminNG.Controllers
             var l = pagos.ToList();
             //l.ForEach( p=> p.Importe *= -1); // cambiar signo
             return View(await pagos.ToListAsync());
+        }
+
+
+        public ActionResult Create(int FamiliaID)
+        {
+            VMPagoCrear newPago = new VMPagoCrear();
+            newPago.FamiliaID = FamiliaID;
+            newPago.Fecha = DateTime.Now;
+            newPago.Familia = db.Familia.Find(newPago.FamiliaID);
+
+
+            ViewBag.Saldo = new BSFicha(db).Saldo(newPago.FamiliaID, newPago.Fecha);
+            return View(newPago);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(VMPagoCrear pagoContado)
+        {
+            try
+            {
+                AdminNG.Business.BSPago BSPago = new Business.BSPago(db);
+
+                //pagoContado.Usuario = System.Web.HttpContext.Current.User.Identity.Name;
+                //pagoContado.SedeID = (int)Session["SedeID"];
+
+                //if (await BSPago.CrearPagoContado(pagoContado, ModelState))
+                //{
+                //    return RedirectToAction("Index", "Pagos");
+                //}
+                ////db.Entry(pagoContado).Reference( p => p.Familia ).Load();
+                pagoContado.Familia = db.Familia.Find(pagoContado.FamiliaID);
+
+            }
+            catch (RetryLimitExceededException ex)
+            {
+                LogHelper.LogExcepcion(ex);
+                ModelState.AddModelError("", AdminNG.Properties.Resources.UnableToSaveChanges);
+            }
+            //ViewBag.ID = new SelectList(db.Inscripciones, "ID", "ID", alumno.ID);
+            return View(pagoContado);
         }
 
         // GET: Pagos/Renumerar/5

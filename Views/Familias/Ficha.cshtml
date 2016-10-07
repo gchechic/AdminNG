@@ -48,8 +48,12 @@
             }
         </table>
     }
-    Ingresar Pago:@Html.ActionLink("Recibo", "CreateRecibo", "PagoContados", new { FamiliaID = Model.Familia.ID}, null)     |
-    @Html.ActionLink("Bancario", "Create", "PagoBancarios", new { FamiliaID = Model.Familia.ID }, null)
+    Ingresar Pago:
+    @Html.ActionLink("Recibo", "CreateRecibo", "PagoContados", new { FamiliaID = Model.Familia.ID}, null)     |
+    @Html.ActionLink("Bancario", "Create", "PagoBancarios", new { FamiliaID = Model.Familia.ID }, null) |
+    @Html.ActionLink("Pago", "Create", "Pagos", new { FamiliaID = Model.Familia.ID }, null)
+
+    
 
     @if (Model.CargosPendientes != null)
     {

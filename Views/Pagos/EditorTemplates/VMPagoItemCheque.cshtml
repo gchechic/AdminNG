@@ -1,0 +1,11 @@
+﻿@model AdminNG.ViewModels.Pagos.VMPagoItemCheque
+@using AdminNG.Models
+<div class="itemCheque">
+    <p>
+        <label>Detalle</label>
+        @Html.TextBoxFor(x => x.Detalle)
+       
+        @Html.HiddenFor(x => x.deleteItem, new { @class = "mark-for-delete" })
+        @Html.RemoveLink("Remove", "div.itemCheque", "input.mark-for-delete")
+    </p>
+</div>
